@@ -1,0 +1,41 @@
+block content
+html
+    head
+        title Socket.IO chat
+        link(rel='stylesheet', href='./stylesheets/bootstrap/bootstrap.css')
+        script (src="../public/javascripts/bootstrap/bootstrap.js")
+    style.
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body { font: 13px Helvetica, Arial; }
+            form { position: fixed; bottom: 0; width: 100%; }
+            form input {  padding: 10px; width: 90%; margin-right: .5%; }
+            form button { width: 9%;  padding: 10px; }
+            #messages { list-style-type: none; margin: 20px; padding: 10px; }
+            #messages li { padding: 5px 10px; }
+            #messages li:nth-child(odd) { background: #eee; }
+    body
+        ul#messages
+        form.form-horizontal(action='')
+         p
+                input.input-sm(autocomplete='off')
+                button.btn.btn-primary Send
+        script(src='https://cdn.socket.io/socket.io-1.2.0.js')
+        script(src='http://code.jquery.com/jquery-1.11.1.js')
+        script.
+            var socket = io();
+            var name = '#{user.firstname}';
+            $('form').submit(function(){
+                socket.emit('chat message', user.email + ': ' + $('.input-sm').val());
+                $('.input-sm').val('');
+                return false;
+            });
+            socket.on('chat message', function(msg){
+                $('#messages').append($('<li>').text(msg));
+            });
+
+//block content
+//    title= title
+//    p Welcome to #{title}
+//    p email: #{user.email}
+//    p firstname: #{user.firstname}
+//

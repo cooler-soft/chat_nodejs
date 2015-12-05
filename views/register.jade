@@ -1,0 +1,43 @@
+
+block content
+    title= title
+    link(rel='stylesheet', href='./stylesheets/bootstrap/bootstrap.css')
+    link(rel='stylesheet', href='./stylesheets/signin.css')
+
+    .container
+        form.form-signin(method='post', accept-charset='utf-8', autocomplete='off', role='form', name='form-signin')
+            h2.form-signin-heading Please register
+            input(type="hidden", name="_csrf", value=csrfToken)
+            if error
+                .alert.alert-danger.alert-dismissible(role='alert')
+                    button.close(type='button', data-dismiss='alert', aria-label='Close')
+                        span(aria-hidden='true') x
+                    strong Error! #{error}
+
+            input.form-control(type='text', name='firstname', placeholder='Firstname', required='', autofocus='')
+            input.form-control(type='text', name='lastname', placeholder='Lastname', required='', autofocus='')
+            input.form-control(type='email', name='email', placeholder='Email address', required='', autofocus='')
+            input.form-control(type='password', name='password', placeholder='Password', required='')
+            button.btn.btn-lg.btn-primary.btn-block(type='submit', name='sign-me-up') Register
+            button.btn.btn-lg.btn-default.btn-block(type='button', onclick="location.href='./auth'") Sign In
+
+script(type='text/javascript' src='./javascripts/auth/auth.js')
+script(type='text/javascript').
+    $(document).ready(function () {
+        $(".close").click(function () {
+            $(this).alert('close');
+        });
+
+        var _auth = new auth();
+        $('#form-signin').submit(function () {
+            var email = $("#email").val();
+            var fullname = $("#firstname").val() + ' ' + $("#lastname").val();
+
+            if (!_auth.isSetProfileLocalStorage()) {
+                _auth.setProfileLocalStorageData(fullname, email);
+            } else {
+                _auth.clearProfileLocalStorega();
+                _auth.setProfileLocalStorageData(fullname, email);
+            }
+        })
+    });

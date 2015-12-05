@@ -1,0 +1,32 @@
+
+block content
+    title= title
+    link(rel='stylesheet', href='./stylesheets/bootstrap/bootstrap.css')
+    link(rel='stylesheet', href='./stylesheets/signin.css')
+    script(type='text/javascript' src='./javascripts/auth/auth.js')
+    body
+    .container
+        form.form-signin(method='post', accept-charset='utf-8', autocomplete='off', role='form', name='form-signin')
+            h2.form-signin-heading Please sign in
+            input(type="hidden", name="_csrf", value=csrfToken)
+            if error
+                .alert.alert-danger.alert-dismissible(role='alert')
+                    button.close(type='button', data-dismiss='alert', aria-label='Close')
+                        span(aria-hidden='true') x
+                    strong Error! #{error}
+
+            input#email.form-control(type='email', name='email', placeholder='Email address', required='', autofocus='')
+
+            input#password.form-control(type='password', name='password', placeholder='Password', required='')
+
+            button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign in
+            button.btn.btn-lg.btn-default.btn-block(type='button', onclick="location.href='./register'") Registration
+
+    script(type='text/javascript').
+        $(document).ready(function() {
+
+        // Init the js of page auth
+        var _auth = new auth();
+        _auth.init();
+        _auth.loadProfile();
+        });
