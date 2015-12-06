@@ -16,7 +16,7 @@ var express         = require('express'),
     auth            = require('./routes/auth'),
     register        = require('./routes/register'),
     room            = require('./routes/room'),
-    mongo           = require('./routes/couch');
+    couch           = require('./routes/couch');
 
 var app = require('express')();
 var http = require('http').Server(app);
@@ -41,7 +41,7 @@ app.use(sessions.session);
 // middleware of session authenticate user
 app.use(function(req, res, next) {
     if (req.session && req.session.user) {
-        mongo.Users.findOneByView('_design/findOneByView/_view/findOneByView', req.session.user.email, function(err, user) {
+        couch.Users.findOneByView('_design/findOneByView/_view/findOneByView', req.session.user.email, function(err, user) {
             if (user) {
                 req.user = user;
                 delete req.user.password;

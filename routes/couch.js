@@ -6,7 +6,7 @@ var myModel = couchDBModel(dbHandle);
 
 //var nodeCouchDB = require('node-couchdb');
 
-// Connect to mongo
+// Connect to couch
 //mongodb.connect('mongodb://localhost/chatrooms');
 //var couch = new nodeCouchDB("localhost", 5984);
 //
