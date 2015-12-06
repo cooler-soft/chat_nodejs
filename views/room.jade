@@ -25,7 +25,7 @@ html
             var socket = io();
             var name = '#{user.firstname}';
             $('form').submit(function(){
-                socket.emit('chat message', user.email + ': ' + $('.input-sm').val());
+                socket.emit('chat message', name + ': ' + $('.input-sm').val());
                 $('.input-sm').val('');
                 return false;
             });
