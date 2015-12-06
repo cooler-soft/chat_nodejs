@@ -4,14 +4,6 @@ var dbHandle = nano.use('itirod');
 var couchDBModel = require('couchdb-model');
 var myModel = couchDBModel(dbHandle);
 
-//var nodeCouchDB = require('node-couchdb');
-
-// Connect to couch
-//mongodb.connect('mongodb://localhost/chatrooms');
-//var couch = new nodeCouchDB("localhost", 5984);
-//
-//var Schema = nodeCouchDB.Schema;
-//var ObjectId = Schema.ObjectId;
 
 var Users = myModel.create({
     id: String,
